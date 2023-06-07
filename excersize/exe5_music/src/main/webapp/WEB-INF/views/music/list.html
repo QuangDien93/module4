@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>LIST OF MUSIC</h1>
+<h2><a href="/music/create">Creat a new music!!</a></h2>
+<table id="customers">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>Singer</th>
+        <th>Type</th>
+        <th>Link</th>
+        <th colspan="2">Action</th>
+    </tr>
+    <tr th:each="m: ${musics}" th:object="${m}">
+        <td th:text="*{musicId}"></td>
+        <td th:text="*{musicName}"></td>
+        <td th:text="*{musicSinger}"></td>
+        <td th:text="*{musicType}"></td>
+        <td><a th:href="@{*{musicLink}}" th:text="*{musicLink}"></a></td>
+        <td><a th:href="@{/music/update(id=*{musicId})}">update</a></td>
+        <td><a th:href="@{/music/delete(id=*{musicId})}">detele</a></td>
+    </tr>
+</table>
+</body>
+</html>
